@@ -6,7 +6,7 @@ export default function Price (props) {
   const apiKey = 'D44C9DE8-B752-4409-A654-BB95BC4C19DB';
   const params = useParams()
   const symbol = params.symbol
-  const url = `http://rest-sandbox.coinapi.io/v1/exchangerate/${ symbol }/USD?apikey=${ apiKey }`;
+  const url = `https://rest-sandbox.coinapi.io/v1/exchangerate/${ symbol }/USD?apikey=${ apiKey }`;
 
   const [coin, setCoin] = useState( null );
 
@@ -22,12 +22,10 @@ export default function Price (props) {
     }
   };
 
-  // useEffect to run getCoin when component mounts
   useEffect(() => {
     getCoin();
   }, []);
-
-  // loaded function for when data is fetched
+  
   const loaded = () => {
     return (
       <div>
@@ -39,11 +37,16 @@ export default function Price (props) {
     );
   };
 
-  // Function for when data doesn't exist
+  
   const loading = () => {
     return <h1>Loading...</h1>;
   };
 
-  // if coin has data, run the loaded function, otherwise, run loading
   return coin && coin.rate ? loaded() : loading();
 };
+
+
+  // useEffect to run getCoin when component mounts
+  // loaded function for when data is fetched
+  // Function for when data doesn't exist
+  // if coin has data, run the loaded function, otherwise, run loading
